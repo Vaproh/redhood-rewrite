@@ -9,7 +9,7 @@ from colorama import Fore
 # bot subclass
 
 
-class CustomBot(commands.Bot):
+class RedHood(commands.Bot):
     def __init__(
         self, command_prefix: str, intents: discord.Intents, *args, **kwargs
     ) -> None:
@@ -18,14 +18,18 @@ class CustomBot(commands.Bot):
 
     # Here you are overriding the default start method and write your own code.
     async def setup_hook(self) -> None:
-        
-        print(Fore.GREEN + "loading cogs...")
+        exts = config.cogExt
+
         # loading cogs
-        
-        for ext in config.cogExt:
-            await self.load_extension(ext)
-        
-        print(Fore.GREEN + "All cogs are loaded successfully!")
+        if not exts:
+            print(Fore.RED + "No cogs were provided!")
+            return
+        else:
+            print(Fore.GREEN + "loading cogs...")
+            for ext in exts:
+                await self.load_extension(ext)
+            
+            print(Fore.GREEN + "All cogs are loaded successfully!")
 
         # connecting wavelink
         print(Fore.LIGHTGREEN_EX + "connecting wavelink..")
@@ -79,14 +83,14 @@ async def prefix(self, message: discord.Message):
 
 # bot variable
 if __name__ == "__main__":
-    bot = CustomBot(command_prefix=prefix, intents=discord.Intents.all())
+    bot = RedHood(command_prefix=prefix, intents=discord.Intents.all())
 
     # logging in with token
     bot.run(config.DISCORD_TOKEN, root_logger=True)
 
     # printing sigint receiving
     print("\nReceived SIGINT (Ctrl+C), exiting...")
-    
+
     # signal input
     signal.signal(
         signal.SIGINT,
