@@ -69,12 +69,12 @@ class RedHood(commands.Bot):
 
         # intro
         print(f"""Logged In As {bot.user}\nID - {bot.user.id}
-        {config.botName} Here!
-        logged In as {bot.user.name}
-        Total servers ~ {len(bot.guilds)}
-        Total Users ~ {len(bot.users)}
-        Bot is online!
-        \nPress Ctrl+C to exit""")
+    {config.botName} Here!
+    logged In as {bot.user.name}
+    Total servers ~ {len(bot.guilds)}
+    Total Users ~ {len(bot.users)}
+    Bot is online!
+    \nPress Ctrl+C to exit""")
 
 
 async def prefix(self, message: discord.Message):
