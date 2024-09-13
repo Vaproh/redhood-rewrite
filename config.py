@@ -50,7 +50,9 @@ os.environ["JISHAKU_FORCE_PAGINATOR"] = "True"
 
 # cogs
 cogExt: final = [
-
+    "commands.music",
+    "handlers/music_handler",
+    "handlers/error_handler",
 ]
 
 # logger

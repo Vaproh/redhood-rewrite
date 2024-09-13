@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 
 # importing bot subclass
-from main import CustomBot
+from redhood import RedHood
 
 # importing music module
 import wavelink
@@ -72,7 +72,7 @@ time = datetime.datetime.now()
 
 # class starts here
 class Music(commands.Cog):
-    def __init__(self, bot: CustomBot):
+    def __init__(self, bot: RedHood):
         self.bot = bot
 
     # play command
@@ -1033,5 +1033,5 @@ class Music(commands.Cog):
 
 
 # setup command
-async def setup(bot: CustomBot) -> None:
+async def setup(bot: RedHood) -> None:
     await bot.add_cog(Music(bot))

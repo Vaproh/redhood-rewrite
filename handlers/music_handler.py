@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 
 # improting main bot class
-from main import CustomBot
+from redhood import RedHood
 
 # importing utility modules
 import wavelink
@@ -38,7 +38,7 @@ def convert_to_minutes(milliseconds: int) -> str:
 
 
 class MusicHandler(commands.Cog):
-    def __init__(self, bot: CustomBot):
+    def __init__(self, bot: RedHood):
         self.bot = bot
 
     # wavelink node ready
@@ -120,5 +120,5 @@ class MusicHandler(commands.Cog):
 # setup
 
 
-async def setup(bot: CustomBot):
+async def setup(bot: RedHood):
     await bot.add_cog(MusicHandler(bot))
