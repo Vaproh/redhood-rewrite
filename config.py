@@ -6,6 +6,9 @@ from dotenv import load_dotenv
 import discord
 load_dotenv(dotenv_path="./.env")
 
+# prefix
+prefix: final = "$$"
+
 # logger
 logger = logging.getLogger("bot")
 

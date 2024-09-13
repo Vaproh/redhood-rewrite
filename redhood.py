@@ -1,11 +1,10 @@
 import discord
 from discord.ext import commands
-import time
 import config
 import signal
-import os
 import wavelink
 import asyncio
+from colorama import Fore
 
 # bot subclass
 
@@ -19,17 +18,17 @@ class CustomBot(commands.Bot):
 
     # Here you are overriding the default start method and write your own code.
     async def setup_hook(self) -> None:
-        print("loading cogs...")
+        
+        print(Fore.GREEN + "loading cogs...")
         # loading cogs
+        
         for ext in config.cogExt:
             await self.load_extension(ext)
-        print("All cogs are loaded successfully!")
-        print("Syncing slash commands...")
+        
+        print(Fore.GREEN + "All cogs are loaded successfully!")
 
         # connecting wavelink
-        print("connecting wavelink...")
-        time.sleep(0.1)
-        print("connecting wavelink..")
+        print(Fore.LIGHTGREEN_EX + "connecting wavelink..")
         nodes = [
             wavelink.Node(
                 uri=config.lavalink_url,
@@ -37,12 +36,10 @@ class CustomBot(commands.Bot):
                 inactive_player_timeout=10,
             )
         ]  # decalring nodes variable
-        time.sleep(0.1)
-        print("connecting wavelink.")
+
         # connecting...
         await wavelink.Pool.connect(nodes=nodes, client=self, cache_capacity=100)
-        time.sleep(0.1)
-        print("Wavelink connected successfully!")
+        print(Fore.LIGHTGREEN_EX + "Wavelink connected successfully!")
 
     # on connect event
     async def on_connect(self):
@@ -77,7 +74,7 @@ class CustomBot(commands.Bot):
 
 
 async def prefix(self, message: discord.Message):
-    return commands.when_mentioned_or("::")(self, message)
+    return commands.when_mentioned_or(config.prefix)(self, message)
 
 
 # bot variable
@@ -87,13 +84,11 @@ if __name__ == "__main__":
     # logging in with token
     bot.run(config.DISCORD_TOKEN, root_logger=True)
 
-    # clearing the screen and proceeding
-    os.system("cls" if os.name == "nt" else "clear")
     # printing sigint receiving
-    print("Received SIGINT (Ctrl+C), exiting...")
-    time.sleep(2.5)
+    print("\nReceived SIGINT (Ctrl+C), exiting...")
+    
     # signal input
     signal.signal(
         signal.SIGINT,
-        lambda sig, frame: print("Received SIGINT (Ctrl+C), exiting...") or bot.close(),
+        lambda sig, frame: bot.close(),
     )
