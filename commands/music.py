@@ -1,6 +1,5 @@
 # importing discord modules
 import typing
-import wavelink
 import discord
 from discord.ext import commands
 
@@ -126,7 +125,6 @@ class Music(commands.Cog):
         # partial = AutoPlay will play songs for us, but WILL NOT fetch recommendations...
         # disabled = AutoPlay will do nothing...
         player.autoplay = wavelink.AutoPlayMode.disabled
-        autoplay = player.autoplay
 
         # Lock the player to this channel...
         if not hasattr(player, "home"):
@@ -169,7 +167,7 @@ class Music(commands.Cog):
             elif Player.playing:
                 embed_queue = discord.Embed(color=config.color_sec)
                 embed_queue.set_author(
-                    name=f"Track added in the queue!",
+                    name="Track added in the queue!",
                     url=track.uri,
                     icon_url="https://cdn.discordapp.com/emojis/1226985238891204762.gif?size=96&quality=lossless",
                 )
@@ -181,12 +179,10 @@ class Music(commands.Cog):
                 embed_queue.add_field(
                     name="Track Length", value=f"{convert_to_minutes(track.length)}"
                 )
-                # embed_queue2.add_field(name="Track position in queue", value=wavelink.Queue.index(item=track.title))
                 embed_queue.set_footer(
                     icon_url=ctx.author.avatar.url,
                     text=f"Requested by {ctx.author.display_name}",
                 )
-                # embed_queue2.timestamp(time)
                 await ctx.send(embed=embed_queue)
 
         if not player.playing:
@@ -516,7 +512,7 @@ class Music(commands.Cog):
         # embed
         embed_play = discord.Embed(color=config.color_main)
         embed_play.set_author(
-            name=f"Now Playing!",
+            name="Now Playing!",
             url=track.current.uri,
             icon_url="https://cdn.discordapp.com/emojis/1226964487572029554.gif?size=96&quality=lossless",
         )
@@ -1012,24 +1008,57 @@ class Music(commands.Cog):
         # checking perms...
         await check_perms(self, ctx)
 
-        # checking input
-        if input == "on":  # on autplay on parameter
+        thumbnailImage = "https://images-ext-1.discordapp.net/external/\
+7QRT3cXpyl7PjWyxDVQDQ6inUaXKHO2vmF4pQ1PhG64/%3Fsize%3D160%26name%\
+3Dfuck%2Byou/https/media.discordapp.net/stickers/1124155345728700527.png\
+?format=webp&quality=lossless"
+
+        if input == "on":
             player.autoplay = wavelink.AutoPlayMode.enabled
 
-            await ctx.send("Autoplay has been enabled!")
+            # embedAutoplay
+            embedAutoplay = discord.Embed(
+                title="Autoplay",
+                color=config.color_main,
+                description="Autoplay has been enabled!",
+            )
+            embedAutoplay.set_thumbnail(url=thumbnailImage)
+            embedAutoplay.set_footer(
+                icon_url=ctx.author.avatar.url,
+                text=f"Requested by {ctx.author.display_name}.",
+            )
 
+            await ctx.send(embed=embedAutoplay)
         elif input == "off":
-            player.autoplay = wavelink.AutoPlayMode.disabled
-
-            await ctx.send("autoplay has been turned off!")
-
-        elif input == "partial":
             player.autoplay = wavelink.AutoPlayMode.partial
 
-            await ctx.send("autoplay has been set to partial!")
+            # embedAutoplay
+            embedAutoplay = discord.Embed(
+                title="Autoplay",
+                color=config.color_main,
+                description="Autoplay has been disabled!",
+            )
+            embedAutoplay.set_thumbnail(url=thumbnailImage)
+            embedAutoplay.set_footer(
+                icon_url=ctx.author.avatar.url,
+                text=f"Requested by {ctx.author.display_name}.",
+            )
 
+            await ctx.send(embed=embedAutoplay)
         else:
-            await ctx.send("invalid input")
+            # embedAutoplay
+            embedAutoplay = discord.Embed(
+                title="Autoplay",
+                color=config.color_main,
+                description="Invalid Argument. Only allowed arguments are `on` and `off`.",
+            )
+            embedAutoplay.set_thumbnail(url=thumbnailImage)
+            embedAutoplay.set_footer(
+                icon_url=ctx.author.avatar.url,
+                text=f"Requested by {ctx.author.display_name}.",
+            )
+
+            await ctx.send(embed=embedAutoplay)
 
 
 # setup command

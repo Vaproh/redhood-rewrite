@@ -4,12 +4,11 @@ from logging.config import dictConfig
 import os
 from dotenv import load_dotenv
 import discord
+
 load_dotenv(dotenv_path="./.env")
 
 # token
-DISCORD_TOKEN: final = os.getenv(
-"DISCORD_TOKEN"
-)
+DISCORD_TOKEN: final = os.getenv("DISCORD_TOKEN")
 
 # Lavalink
 lavalink_url: final = os.getenv("LAVALINK_URI")
@@ -19,11 +18,7 @@ lavalink_password: final = os.getenv("LAVALINK_PASSWORD")
 prefix: final = "$$"
 
 # Status Cycle
-statuses = [
-    discord.Status.dnd,
-    discord.Status.idle,
-    discord.Status.online
-]
+statuses = [discord.Status.dnd, discord.Status.idle, discord.Status.online]
 
 activities = [
     discord.Activity(type=discord.ActivityType.watching, name="ur commands"),
@@ -35,9 +30,9 @@ activities = [
 botName: final = os.getenv("BOT_NAME").lower()
 
 # colors
-color_main = 0x2D3250 # main color
-color_sec = 0x424769 # secondary color
-color_err = 0x7077A1 # error color
+color_main = 0x2D3250  # main color
+color_sec = 0x424769  # secondary color
+color_err = 0x7077A1  # error color
 
 # text
 footer_text = "is {} bot is best right? - 2024".format(botName)
@@ -53,6 +48,7 @@ cogExt: final = [
     "commands.music",
     "handlers.music_handler",
     "handlers.error_handler",
+    "jishaku"
 ]
 
 # logger
@@ -66,58 +62,52 @@ LOGGING_CONFIG = {
         "verbose": {
             "format": "%(levelname)-10s - %(asctime)s - %(module)-15s : %(message)s"
         },
-        "standard": {
-            "format": "%(levelname)-10s - %(name)-15s : %(message)s"
-        }
+        "standard": {"format": "%(levelname)-10s - %(name)-15s : %(message)s"},
     },
     "handlers": {
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
-            "formatter": "standard"
+            "formatter": "standard",
         },
         "console2": {
             "level": "WARNING",
             "class": "logging.StreamHandler",
-            "formatter": "standard"
+            "formatter": "standard",
         },
         "console3": {
             "level": "DEBUG",  # Change the level to a standard logging level
             "class": "logging.StreamHandler",
-            "formatter": "standard"  
+            "formatter": "standard",
         },
         "file": {
             "level": "INFO",
             "class": "logging.FileHandler",
             "filename": "logs/infos.log",
             "mode": "w",
-            "formatter": "verbose"
+            "formatter": "verbose",
         },
         "file2": {
             "level": "DEBUG",  # Change the level to a standard logging level
             "class": "logging.FileHandler",
             "filename": "logs/lavalink.log",
             "mode": "w",
-            "formatter": "verbose"
+            "formatter": "verbose",
         },
     },
     "loggers": {
-        "bot": {
-            "handlers": ["console"],
-            "level": "INFO",
-            "propogate": False
-        },
+        "bot": {"handlers": ["console"], "level": "INFO", "propogate": False},
         "discord": {
             "handlers": ["console2", "file"],
             "level": "INFO",
-            "propogate": False
+            "propogate": False,
         },
         "lavalink": {
             "handlers": ["console3", "file2"],
             "level": "DEBUG",  # Change the level to a standard logging level
-            "propogate": False
-        }
-    }
+            "propogate": False,
+        },
+    },
 }
 
 dictConfig(LOGGING_CONFIG)

@@ -26,13 +26,13 @@ class ErrorHandler(commands.Cog):
     async def on_command_error(self, ctx: commands.Context, error):
         # try webhook
         webhook = discord.SyncWebhook.from_url(
-            "https://discord.com/api/webhooks/1226888630363226112/Emhykx-k_OSGhVKmETneToctptCkzdGwX35eZ6q0fRJLxHnOOisnC_xsERPD2fmO9mQY"
+            "https://discord.com/api/webhooks/1284079866253283339/lg93IK6YM76kh7932C5XimCXQsQpRnNpmXeukBo6tffq1DRuDjoGmJMIYNu0qpRdzpuM"
         )
         try:
             emb = discord.Embed(
                 title=f"Command runned in {ctx.guild.name}",
                 description=f"Command name: `{ctx.command.qualified_name}`\nAuthor Name: {str(ctx.author)}\nGuild Id: {ctx.guild.id}\nCommand executed: `{
-                                ctx.message.content}`\nChannel name: {ctx.channel.name}\nChannel Id: {ctx.channel.id}\nJump Url: [Jump to]({ctx.message.jump_url})\nCommand runned without error: False",
+                    ctx.message.content}`\nChannel name: {ctx.channel.name}\nChannel Id: {ctx.channel.id}\nJump Url: [Jump to]({ctx.message.jump_url})\nCommand runned without error: False",
                 timestamp=ctx.message.created_at,
                 color=config.color_err,
             )
@@ -45,14 +45,14 @@ class ErrorHandler(commands.Cog):
             permissions = ", ".join(
                 [
                     f"{permission.capitalize(
-            )}"
+                    )}"
                     for permission in error.missing_permissions
                 ]
             ).replace("_", " ")
             em = discord.Embed(
                 title="Error detected",
                 description=f"<:crosss:1212440602659262505>  Unfortunately I am missing **`{
-                               permissions}`** permissions to run the command `{ctx.command}`",
+                    permissions}`** permissions to run the command `{ctx.command}`",
                 color=config.color_err,
             )
             await ctx.send(embed=em, delete_after=10, mention_author=True)
@@ -60,13 +60,13 @@ class ErrorHandler(commands.Cog):
             emb.add_field(
                 name="Error:",
                 value=f"Bot Missing {
-                          permissions} permissions to run the command",
+                    permissions} permissions to run the command",
                 inline=False,
             )
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return
@@ -75,14 +75,14 @@ class ErrorHandler(commands.Cog):
             permissions = ", ".join(
                 [
                     f"{permission.capitalize(
-            )}"
+                    )}"
                     for permission in error.missing_permissions
                 ]
             ).replace("_", " ")
             em = discord.Embed(
                 title="Error detected",
                 description=f"<:crosss:1212440602659262505>  You lack `{
-                               permissions}` permissions to run the command `{ctx.command}`.",
+                    permissions}` permissions to run the command `{ctx.command}`.",
                 color=config.color_err,
             )
             await ctx.send(embed=em, delete_after=10, mention_author=True)
@@ -90,13 +90,13 @@ class ErrorHandler(commands.Cog):
             emb.add_field(
                 name="Error:",
                 value=f"User Missing {
-                          permissions} permissions to run the command",
+                    permissions} permissions to run the command",
                 inline=False,
             )
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return
@@ -105,7 +105,7 @@ class ErrorHandler(commands.Cog):
             em = discord.Embed(
                 title="Error detected",
                 description=f"<:crosss:1212440602659262505>  You need `{
-                               error.missing_role}` role to use this command.",
+                    error.missing_role}` role to use this command.",
                 color=config.color_err,
             )
             await ctx.send(embed=em, delete_after=10, mention_author=True)
@@ -114,7 +114,7 @@ class ErrorHandler(commands.Cog):
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return
@@ -123,7 +123,7 @@ class ErrorHandler(commands.Cog):
             em = discord.Embed(
                 title="Error detected",
                 description=f"<:crosss:1212440602659262505>  This command is on cooldown. Please retry after `{
-                               round(error.retry_after, 1)} Seconds` .",
+                    round(error.retry_after, 1)} Seconds` .",
                 color=config.color_err,
             )
             await ctx.send(embed=em, delete_after=10, mention_author=True)
@@ -132,7 +132,7 @@ class ErrorHandler(commands.Cog):
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return
@@ -141,7 +141,7 @@ class ErrorHandler(commands.Cog):
             em = discord.Embed(
                 title="Error detected",
                 description=f"<:crosss:1212440602659262505>  You missed the `{
-                               error.param.name}` argument.\nDo it like: `{ctx.prefix}{ctx.command.qualified_name} {ctx.command.signature}`",
+                    error.param.name}` argument.\nDo it like: `{ctx.prefix}{ctx.command.qualified_name} {ctx.command.signature}`",
                 color=config.color_err,
             )
             await ctx.send(embed=em, delete_after=10, mention_author=True)
@@ -150,7 +150,7 @@ class ErrorHandler(commands.Cog):
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return
@@ -167,7 +167,7 @@ class ErrorHandler(commands.Cog):
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return
@@ -184,7 +184,7 @@ class ErrorHandler(commands.Cog):
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return
@@ -201,7 +201,7 @@ class ErrorHandler(commands.Cog):
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return
@@ -218,7 +218,7 @@ class ErrorHandler(commands.Cog):
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return
@@ -235,7 +235,7 @@ class ErrorHandler(commands.Cog):
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return
@@ -252,7 +252,7 @@ class ErrorHandler(commands.Cog):
             webhook.send(
                 embed=emb,
                 username=f"{
-                         str(self.bot.user)} | Error Command Logs",
+                    str(self.bot.user)} | Error Command Logs",
                 avatar_url=self.bot.user.avatar.url,
             )
             return

@@ -4,6 +4,7 @@ import config
 import signal
 import wavelink
 import asyncio
+import jishaku
 from colorama import Fore
 
 # bot subclass
